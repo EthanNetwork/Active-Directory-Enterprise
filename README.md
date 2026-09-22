@@ -93,7 +93,7 @@ gpupdate /force
 
 ![gpupdate force on the Domain Controller](images/10-gpupdate-force.png)
 
-During testing, GPO changes did not always apply immediately in the user context. This was resolved by running `gpupdate /force` on both the server and client side, followed by a full user logoff/logon (rather than just a lock/unlock) to force the user-context policy to reprocess.
+During testing, GPO changes did not always apply immediately in the user context. This was resolved by running `gpupdate /force` on the server side, followed by a full user logoff/logon (rather than just a lock/unlock) to force the user-context policy to reprocess.
 
 ## Proof of Enforcement
 
