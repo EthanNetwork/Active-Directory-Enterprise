@@ -40,7 +40,7 @@ This structure keeps policy scope clean and gives room to expand with additional
 
 DHCP is running on the Domain Controller, serving a scope for client workstations.
 
-![DHCP console showing active scope](images/02-dhcp-console.png)
+![DHCP console showing active scope](/02-dhcp-console.png)
 
 **Scope details:**
 - Scope name: `OFFICE_PC_IP`
@@ -48,21 +48,21 @@ DHCP is running on the Domain Controller, serving a scope for client workstation
 - Address pool: `172.168.10.1` to `172.168.10.254`
 - Excluded addresses: `172.168.10.1` and `172.168.10.2` (reserved for Domain Controller and Default Gateway)
 
-![DHCP address pool and exclusions](images/03-dhcp-scope.png)
+![DHCP address pool and exclusions](/03-dhcp-scope.png)
 
 Active leases confirm clients are pulling addresses correctly from the pool:
 
-![DHCP address leases](images/04-dhcp-leases.png)
+![DHCP address leases](/04-dhcp-leases.png)
 
 ## Group Policy Object: user_base_policy
 
 A custom GPO named **user_base_policy** was created and linked to the Workstations OU. It applies under User Configuration > Policies > Administrative Templates, targeting Control Panel and System restrictions for any user logging into a machine in scope. 
 
-![Server Manager navigation](images/05-server-manager-menu.png)
+![Server Manager navigation](/05-server-manager-menu.png)
 
 ### Control Panel restrictions
 
-![Group Policy Management Editor, Control Panel settings](images/06-gpo-control-panel.png)
+![Group Policy Management Editor, Control Panel settings](/06-gpo-control-panel.png)
 
 ### System restrictions
 
@@ -75,13 +75,13 @@ The following user-level restrictions were configured and enabled under System s
 | Remove Task Manager | Enabled | Blocks taskmgr.exe to prevent users from killing processes or inspecting running services |
 | Remove Change Password | Enabled | Removes the Change Password button from the Ctrl+Alt+Del security screen |
 
-![System policy list showing enabled restrictions](images/07-gpo-system-settings.png)
+![System policy list showing enabled restrictions](/07-gpo-system-settings.png)
 
 
 
-![Remove Task Manager policy dialog](images/08-gpo-task-manager.png)
+![Remove Task Manager policy dialog](/08-gpo-task-manager.png)
 
-![Remove Change Password policy dialog](images/09-gpo-change-password.png)
+![Remove Change Password policy dialog](/09-gpo-change-password.png)
 
 ## Applying and Validating the Policy
 
@@ -91,7 +91,7 @@ After linking the GPO, policy was force-pushed from the Domain Controller and re
 gpupdate /force
 ```
 
-![gpupdate force on the Domain Controller](images/10-gpupdate-force.png)
+![gpupdate force on the Domain Controller](/10-gpupdate-force.png)
 
 During testing, GPO changes did not always apply immediately in the user context. This was resolved by running `gpupdate /force` on the server side, followed by a full user logoff/logon (rather than just a lock/unlock) to force the user-context policy to reprocess.
 
@@ -101,19 +101,19 @@ With the policy applied and refreshed on the client, the following restrictions 
 
 **Command Prompt is blocked:**
 
-![Command prompt disabled by administrator](images/11-cmd-disabled.png)
+![Command prompt disabled by administrator](/11-cmd-disabled.png)
 
 **Other applications, like the browser, continue to function normally**, confirming the restriction is scoped to the intended tools rather than breaking the whole session:
 
-![Browser still functioning normally](images/12-browser-still-works.png)
+![Browser still functioning normally](/12-browser-still-works.png)
 
 **Task Manager is blocked:**
 
-![Task Manager disabled by administrator](images/13-taskmgr-disabled.png)
+![Task Manager disabled by administrator](/13-taskmgr-disabled.png)
 
 **Restricted actions return the standard Windows administrative block dialog:**
 
-![Restrictions dialog](images/14-restrictions-dialog.png)
+![Restrictions dialog](/14-restrictions-dialog.png)
 
 
 ## Design Philosophy
