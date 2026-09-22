@@ -19,7 +19,7 @@ An enterprise-style virtual environment built in EVE-NG to practice standing up 
 
 The lab runs on a switch connecting the Domain Controller, three Windows client VMs, and a router running EIGRP providing upstream connectivity out to the internet cloud.
 
-![Lab Topology](images/01-topology.png)
+![Lab Topology](Active-Directory-Enterprise/01-topology.png)
 
 | Device | Role | Interface |
 |---|---|---|
